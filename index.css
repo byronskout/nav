@@ -1,5 +1,8 @@
 :root {
 	--font-family: 'Airbnb Cereal', sans-serif;
+	--color-active: #aaf0d1;
+	--ease: cubic-bezier(0.23, 1, 0.32, 1);
+	--duration: 350ms;
 }
 
 * {
@@ -57,4 +60,19 @@ h2 {
 	font-size: 15px;
 	text-decoration: none;
 	white-space: nowrap;
-  }
+}
+
+.active-line {
+	position: absolute;
+	bottom: 10%;
+	left: 0;
+	height: 80%;
+	border-radius: 4px;
+	background-color: var(--color-active);
+	opacity: 10%;
+	-webkit-transition: width var(--ease) var(--duration), -webkit-transform var(--ease) var(--duration);
+	transition: width var(--ease) var(--duration), -webkit-transform var(--ease) var(--duration);
+	transition: width var(--ease) var(--duration), transform var(--ease) var(--duration);
+	transition: width var(--ease) var(--duration), transform var(--ease) var(--duration),
+		-webkit-transform var(--ease) var(--duration);
+}
