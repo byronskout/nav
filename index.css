@@ -76,3 +76,29 @@ h2 {
 	transition: width var(--ease) var(--duration), transform var(--ease) var(--duration),
 		-webkit-transform var(--ease) var(--duration);
 }
+
+ul:not(.menu) {
+	list-style-type: disc;
+	margin-left: var(--space);
+}
+
+ul:not(.menu) > li + li {
+	margin-top: var(--space);
+}
+
+.nav-sections .menu {
+	position: relative;
+	display: -webkit-box;
+	display: flex;
+	flex-wrap: nowrap;
+	overflow: scroll;
+	-ms-scroll-chaining: none;
+	overscroll-behavior: none;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+	margin: 0 auto;
+}
+
+.nav-sections .menu::-webkit-scrollbar {
+	display: none;
+}

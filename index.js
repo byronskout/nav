@@ -11,25 +11,44 @@ let isScrolling = true;
 let userScroll = true;
 
 const setActiveClass = () => {
-    links[activeIndex].classList.add(activeClass);
+  links[activeIndex].classList.add(activeClass);
 };
 
 const removeActiveClass = () => {
-    links[activeIndex].classList.remove(activeClass);
+  links[activeIndex].classList.remove(activeClass);
 };
 
 const moveActiveLine = () => {
-    const link = links[activeIndex];
-    const linkX = link.getBoundingClientRect().x;
-    const menuX = menu.getBoundingClientRect().x;
+  const link = links[activeIndex];
+  const linkX = link.getBoundingClientRect().x;
+  const menuX = menu.getBoundingClientRect().x;
 
-    activeLine.style.transform = `translateX(${(menu.scrollLeft - menuX) + linkX}px)`;
-    activeLine.style.width = `${link.offsetWidth}px`;
+  activeLine.style.transform = `translateX(${(menu.scrollLeft - menuX) + linkX}px)`;
+  activeLine.style.width = `${link.offsetWidth}px`;
 }
 
 const setMenuLeftPosition = position => {
-    menu.scrollTo({
-        left: position,
-        behavior: 'smooth',
-    });
+  menu.scrollTo({
+    left: position,
+    behavior: 'smooth',
+  });
+};
+
+const checkMenuOverflow = () => {
+  const activeLink = links[activeIndex].getBoundingClientRect();
+  const offset = 30;
+
+  if (Math.floor(activeLink.right) > window.innerWidth) {
+    setMenuLeftPosition(menu.scrollLeft + activeLink.right - window.innerWidth + offset);
+  } else if (activeLink.left < 0) {
+    setMenuLeftPosition(menu.scrollLeft + activeLink.left - offset)
+  }
+}
+
+const handleActiveLinkUpdate = current => {
+  removeActiveClass();
+  activeIndex = current;
+  checkMenuOverflow();
+  setActiveClass();
+  moveActiveLine();
 };
